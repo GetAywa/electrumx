@@ -918,8 +918,8 @@ class DashTestnet(Dash):
     NET = "testnet"
     XPUB_VERBYTES = bytes.fromhex("3a805837")
     XPRV_VERBYTES = bytes.fromhex("3a8061a0")
-    GENESIS_HASH = ('00000bafbc94add76cb75e2ec9289483'
-                    '7288a481e5c005f6563d91623bf8bc2c')
+    GENESIS_HASH = ('0002b2f8bf24aaa3fede2f2faf353eaf'
+		    'ea6f22124b6bd7db77f27185e38dd78c')
     P2PKH_VERBYTE = bytes.fromhex("8c")
     P2SH_VERBYTES = [bytes.fromhex("13")]
     WIF_BYTE = bytes.fromhex("ef")
@@ -932,6 +932,33 @@ class DashTestnet(Dash):
         'electrum.dash.siampm.com s t',
         'dasht.random.re s54002 t54001',
     ]
+
+class Aywa(Coin):
+    NAME = "Aywa"
+    SHORTNAME = "AYWA"
+    NET = "mainnet"
+    XPUB_VERBYTES = bytes.fromhex("02fe52cc")
+    XPRV_VERBYTES = bytes.fromhex("02fe52f8")
+    GENESIS_HASH = ('0002b2f8bf24aaa3fede2f2faf353eaf'
+                    'ea6f22124b6bd7db77f27185e38dd78c')
+    P2PKH_VERBYTE = bytes.fromhex("17")
+    P2SH_VERBYTES = [bytes.fromhex("53")]
+    WIF_BYTE = bytes.fromhex("96")
+    TX_COUNT_HEIGHT = 35186
+    TX_COUNT = 35186
+    TX_PER_BLOCK = 1
+    RPC_PORT = 2778
+    PEERS = [
+        '199.247.4.106.vultr.com s t',
+    ]
+    SESSIONCLS = DashElectrumX
+    DAEMON = daemon.DashDaemon
+
+    @classmethod
+    def header_hash(cls, header):
+        '''Given a header return the hash.'''
+        import x11_hash
+        return x11_hash.getPoWHash(header)
 
 
 class Argentum(AuxPowMixin, Coin):
